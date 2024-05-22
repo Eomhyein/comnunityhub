@@ -65,7 +65,7 @@ router.post('/sign-in', async (req, res, next) => {
     {
       userId: user.userId,
     },
-    'custom-secret-key', //비밀키, dodtenv를 이용해서, 외부에서 코드 못보게!
+    'custom-secret-key', //비밀키, dotenv를 이용해서, 외부에서 코드 못보게!
   );
 
   res.cookie('authorization', `Bearer ${token}`);
