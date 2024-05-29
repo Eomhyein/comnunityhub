@@ -16,7 +16,10 @@ export default async function (req, res, next) {
       throw new Error('토큰 타입이 일치하지 않습니다.');
     
     // 3.3 서버에서 발급한 **JWT가 맞는지 검증**합니다.
-    const decodedToken = jwt.verify(token, 'custom-secret-key');
+    const secretKey = process.env.SECRET_KEY;
+    if(!secretKey) throw new Error('비밀키가 설정되어 있지 않습니다.');
+
+    const decodedToken = jwt.verify(token, 'secretKey');
     const userId = decodedToken.userId;
     
     // 3.4 JWT의 `userId`를 이용해 사용자를 조회합니다.
@@ -35,7 +38,7 @@ export default async function (req, res, next) {
     next();
 
   } catch (error) {
-    res.clearCookie('authorization'); // 특정 쿠키를 삭세시킨다.
+    res.clearCookie('authorization'); // 특정 쿠키를 삭제시킨다.
 
     // 토큰이 만료되었거나, 조작되었을 때, 에러 메시지를 다르게 출력합니다.
     switch (error.name) {
