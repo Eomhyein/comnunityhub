@@ -99,7 +99,6 @@
 |------|---|---|
 |email|string|이메일|
 |password|string|비밀번호|
-
 |name|string|이름|
 |age|number|나이|
 |gender|string |성별|
@@ -121,3 +120,6 @@
   }
 }
 </code></pre>
+
+## 사용자 조회
+- 에러 남 수정 해야됨
